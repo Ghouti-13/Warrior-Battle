@@ -10,6 +10,7 @@ namespace WarriorAnimsFREE
 		public Warrior warrior;
 		public GameObject target;
 		public GameObject weapon;
+		private Player player;
 		private Rigidbody rb;
 		[HideInInspector] public SuperCharacterController superCharacterController;
 		[HideInInspector] public WarriorMovementController warriorMovementController;
@@ -58,6 +59,9 @@ namespace WarriorAnimsFREE
 			// Get Movement Controller.
 			warriorMovementController = GetComponent<WarriorMovementController>();
 
+			// Get the player.
+			player = GetComponent<Player>();
+
 			// Add Timing Controllers.
 			warriorTiming = gameObject.AddComponent<WarriorTiming>();
 			warriorTiming.warriorController = this;
@@ -80,12 +84,12 @@ namespace WarriorAnimsFREE
 				Debug.LogError("ERROR: There is no Animator component for character.");
 				Debug.Break();
 			} else {
-				animator.gameObject.AddComponent<WarriorCharacterAnimatorEvents>();
-				animator.GetComponent<WarriorCharacterAnimatorEvents>().warriorController = this;
-				animator.gameObject.AddComponent<AnimatorParentMove>();
-				animator.GetComponent<AnimatorParentMove>().animator = animator;
-				animator.GetComponent<AnimatorParentMove>().warriorController = this;
-				animator.updateMode = AnimatorUpdateMode.AnimatePhysics;
+                animator.gameObject.AddComponent<WarriorCharacterAnimatorEvents>();
+                animator.GetComponent<WarriorCharacterAnimatorEvents>().warriorController = this;
+                animator.gameObject.AddComponent<AnimatorParentMove>();
+                animator.GetComponent<AnimatorParentMove>().animator = animator;
+                animator.GetComponent<AnimatorParentMove>().warriorController = this;
+                animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 				animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
 			}
 
@@ -158,6 +162,8 @@ namespace WarriorAnimsFREE
 
 		private void Update()
 		{
+			if (GameManager.Instance.CurrentState == GameManager.GameState.GamePaused) return;
+
 			GetInput();
 
 			// Character is on ground.
@@ -262,6 +268,8 @@ namespace WarriorAnimsFREE
 				_canMove = true;
 				SetAnimatorRootMotion(false);
 			}
+
+			player.IsAttacking = b;
 		}
 
 		/// <summary>
