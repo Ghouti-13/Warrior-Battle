@@ -9,6 +9,7 @@ public class Enemy : Warrior
 
     [Space(10)]
     [SerializeField] private HealthBarManager _healthManager;
+    [SerializeField] private BoxCollider _weaponCollider;
 
     private Animator warriorAnimator;
     private AI_Controller warriorAI;
@@ -87,6 +88,14 @@ public class Enemy : Warrior
         warriorAnimator.SetTrigger("Die");
         Destroy(gameObject, 2f);
     }
+    public void EnableWeaponCollider()
+    {
+        _weaponCollider.enabled = true;
+    }
+    public void DisableWeaponCollider()
+    {
+        _weaponCollider.enabled = false;
+    }
     public void EndingAttack()
     {
         isAttackEnded = true;
@@ -97,7 +106,11 @@ public class Enemy : Warrior
         {
             if (!other.TryGetComponent<Player>(out Player player)) return;
 
+            if (player.IsDead) return;
+
             player.TakeDamage(damage, _warriorAudio);
+            hitEffect.transform.position = other.ClosestPoint(other.transform.position) + Vector3.up;
+            hitEffect.Play();
         }
     }
 }

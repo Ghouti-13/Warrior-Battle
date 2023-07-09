@@ -13,6 +13,8 @@ public class Warrior : MonoBehaviour
     [Space(10)]
     [Header("ENEMY ATTACK TIMER")]
     [SerializeField] protected float timeBetweenAttack;
+    [Header("VFX")]
+    [SerializeField] protected ParticleSystem hitEffect;
 
     protected AudioSource _warriorAudio;
 
@@ -69,6 +71,10 @@ public class Warrior : MonoBehaviour
 
         if (!other.TryGetComponent<Warrior>(out Warrior target)) return;
 
+        if (target.isDead) return;
+
         target.TakeDamage(damage, _warriorAudio);
+        hitEffect.transform.position = other.ClosestPoint(other.transform.position) + Vector3.up;
+        hitEffect.Play();
     }
 }

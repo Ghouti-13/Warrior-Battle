@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIMainScreen : MonoBehaviour
 {
     private SceneLoader _sceneLoader;
-
+    
     private void Awake()
     {
         Time.timeScale = 1f;
