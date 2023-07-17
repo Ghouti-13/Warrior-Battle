@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : Warrior
 {
+    [SerializeField] private HealthBarManager healthManager;
+
     private Animator _animator;
 
     public bool IsDead => isDead;
@@ -11,10 +13,13 @@ public class Player : Warrior
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
+        healthManager.SetMaxHealth(maxHealth);
     }
     public override void TakeDamage(int damage, AudioSource warriorAudio)
     {
         base.TakeDamage(damage, warriorAudio);
+
+        healthManager.SetHealthValue(currentHealth);
 
         if (currentHealth == 0) 
         {

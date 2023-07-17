@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Warrior
+public class Enemy : Warrior // ==> INHERITANCE //
 {
     public static event Action OnEnemyDeath = null;
 
@@ -63,6 +63,7 @@ public class Enemy : Warrior
         warriorAnimator.SetBool("Moving", true);
         warriorAnimator.SetFloat("Velocity", 1f);
     }
+    // POLYMORPHISM //
     protected override void Attack()
     {
         base.Attack();
@@ -75,6 +76,7 @@ public class Enemy : Warrior
         warriorAnimator.SetInteger("Trigger Number", 2);
         warriorAnimator.SetTrigger("Trigger");
     }
+    // POLYMORPHISM //
     public override void TakeDamage(int damage, AudioSource warriorAudio)
     {
         base.TakeDamage(damage, warriorAudio);

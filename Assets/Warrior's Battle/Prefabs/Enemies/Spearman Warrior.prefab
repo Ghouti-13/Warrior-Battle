@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.25095615, y: 0.21212089, z: 0.9442956}
-  m_Center: {x: -0.002694728, y: -0.48797455, z: 0.19630478}
+  m_Size: {x: 0.25095615, y: 0.21212088, z: 3.054627}
+  m_Center: {x: -0.002694473, y: -0.48797506, z: -0.8588592}
 --- !u!1 &1782551791915264609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,10 +2088,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3
   m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 300
+  m_AngularSpeed: 360
   m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -2135,7 +2135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage: 10
-  moveSpeed: 16
+  moveSpeed: 10
   isAttacking: 0
   isAttackEnded: 0
   timeBetweenAttack: 1.5

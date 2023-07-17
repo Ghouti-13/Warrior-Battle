@@ -21,6 +21,7 @@ public class Warrior : MonoBehaviour
     protected int currentHealth;
     protected bool isDead = false;
 
+    // Encapsulation //
     public int Damage => damage;
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
     public bool IsAttackEnded { get => isAttackEnded; }
@@ -36,10 +37,12 @@ public class Warrior : MonoBehaviour
     {
 
     }
+    // ABSTRACTION //
     protected virtual void Attack()
     {
         Invoke(nameof(ResetAttack), timeBetweenAttack);
     }
+    // ABSTRACTION //
     public virtual void TakeDamage(int damage, AudioSource warriorAudio)
     {
         if (isDead) return;
@@ -50,7 +53,7 @@ public class Warrior : MonoBehaviour
         warriorAudio?.Play();
 
         // DEBUG //
-        print(gameObject.name + " Health is " + currentHealth + " / " + maxHealth);
+        //print(gameObject.name + " Health is " + currentHealth + " / " + maxHealth);
 
         if (currentHealth == 0) Die();
     }
